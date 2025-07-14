@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Login - PowerOTP</title>
+</head>
+<body>
+  <h2>Admin Login</h2>
+  <input id="user" placeholder="Username"><br>
+  <input id="pass" placeholder="Password" type="password"><br>
+  <button onclick="login()">Login</button>
+
+  <script>
+    async function login() {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          username: document.getElementById('user').value,
+          password: document.getElementById('pass').value
+        })
+      });
+      if ((await res.json()).success) {
+        window.location.href = "dashboard.html";
+      } else {
+        alert("Login Failed");
+      }
+    }
+  </script>
+</body>
+</html>
